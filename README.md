@@ -5,6 +5,7 @@
 [![PyPI version](https://badge.fury.io/py/datasetiq.svg)](https://badge.fury.io/py/datasetiq)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub](https://img.shields.io/github/stars/DataSetIQ/datasetiq-python?style=social)](https://github.com/DataSetIQ/datasetiq-python)
 
 ---
 
