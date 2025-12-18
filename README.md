@@ -2,9 +2,10 @@
 
 **Official Python SDK for [DataSetIQ](https://www.datasetiq.com) — The Modern Economic Data Platform**
 
-[![PyPI version](https://badge.fury.io/py/datasetiq.svg)](https://badge.fury.io/py/datasetiq)
+[![PyPI version](https://img.shields.io/pypi/v/datasetiq.svg)](https://pypi.org/project/datasetiq/)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Downloads](https://img.shields.io/pypi/dm/datasetiq.svg)](https://pypi.org/project/datasetiq/)
 [![GitHub](https://img.shields.io/github/stars/DataSetIQ/datasetiq-python?style=social)](https://github.com/DataSetIQ/datasetiq-python)
 
 ---
@@ -353,6 +354,17 @@ pytest
 black datasetiq tests
 ruff check datasetiq tests
 ```
+
+---
+
+## 🛡️ Stability & API Guarantees
+
+**Current Status: Beta (0.x versions)**
+
+- **Breaking changes** may occur between minor versions (e.g., 0.1.x → 0.2.x)
+- **Core functions** (`get()`, `set_api_key()`) are stable and tested
+- **v1.0 release** will follow semantic versioning with backward compatibility guarantees
+- Subscribe to [GitHub releases](https://github.com/DataSetIQ/datasetiq-python/releases) for updates
 
 ---
 
