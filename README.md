@@ -205,13 +205,15 @@ df = iq.get("fred-cpi")  # Full dataset
 ### Anonymous Mode
 
 **Without API Key:**
-- ⚠️ Paginated JSON (max 100 obs/page, 200 pages = 20K obs)
+- ⚠️ Returns **latest 100 observations** only (most recent data)
 - ⚠️ Lower rate limits (5 RPM)
 - ⚠️ Metadata-only for some datasets
+- ⚠️ No date filtering support
 
 ```python
 # No API key set
-df = iq.get("fred-cpi")  # Limited to 20K observations
+df = iq.get("fred-cpi")  # Latest 100 observations only
+print(df.tail())  # Most recent data points
 ```
 
 ---

@@ -21,7 +21,7 @@ Links:
     - Pricing: https://www.datasetiq.com/pricing
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 # Public API exports
 from .client import get, search
