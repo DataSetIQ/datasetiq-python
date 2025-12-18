@@ -1,0 +1,70 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "datasetiq"
+version = "0.1.0"
+description = "Official Python client for DataSetIQ — The Modern Economic Data Platform"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "DataSetIQ", email = "support@datasetiq.com"}
+]
+keywords = ["economic data", "time series", "pandas", "api", "fred", "datasetiq"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial",
+    "Topic :: Scientific/Engineering",
+]
+
+dependencies = [
+    "requests>=2.31.0",
+    "pandas>=1.5.0",
+    "appdirs>=1.4.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "responses>=0.23.0",
+    "black>=23.7.0",
+    "ruff>=0.0.285",
+]
+
+[project.urls]
+Homepage = "https://www.datasetiq.com"
+Documentation = "https://www.datasetiq.com/docs"
+Repository = "https://github.com/DataSetIQ/datasetiq-python"
+Issues = "https://github.com/DataSetIQ/datasetiq-python/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["datasetiq"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --cov=datasetiq --cov-report=term-missing"
+
+[tool.black]
+line-length = 100
+target-version = ['py39']
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+select = ["E", "F", "I", "W"]
+ignore = ["E501"]
