@@ -12,7 +12,7 @@
 
 ## 🚀 Features
 
-- **40M+ Time Series**: Access FRED, BLS, Census, World Bank, IMF, OECD, and more
+- **Millions of Macro Datasets**: Access FRED, BLS, Census, World Bank, IMF, OECD, and more
 - **Pandas-Ready**: Returns clean DataFrames with date index
 - **Intelligent Caching**: Disk-based caching with TTL (24h default)
 - **Automatic Retries**: Exponential backoff with `Retry-After` support
