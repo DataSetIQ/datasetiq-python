@@ -69,3 +69,4 @@ examples/*.xlsx
 
 # Cache directory (user-specific, don't commit)
 # Note: appdirs creates this in user directory, not in project
+TRUSTED_PUBLISHING_SETUP.md

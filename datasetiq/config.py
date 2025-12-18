@@ -7,6 +7,9 @@ Users can customize behavior via configure() or environment variables.
 import os
 from typing import Optional
 
+# Sentinel value to distinguish "not provided" from "explicitly None"
+_NOT_SET = object()
+
 
 class Config:
     """Global configuration state."""
@@ -41,15 +44,15 @@ _config = Config()
 
 
 def configure(
-    api_key: Optional[str] = None,
-    base_url: Optional[str] = None,
-    timeout: Optional[tuple] = None,
-    max_retries: Optional[int] = None,
-    max_retry_sleep: Optional[int] = None,
-    anon_max_pages: Optional[int] = None,
-    data_cache_ttl: Optional[int] = None,
-    search_cache_ttl: Optional[int] = None,
-    enable_cache: Optional[bool] = None,
+    api_key: Optional[str] = _NOT_SET,
+    base_url: Optional[str] = _NOT_SET,
+    timeout: Optional[tuple] = _NOT_SET,
+    max_retries: Optional[int] = _NOT_SET,
+    max_retry_sleep: Optional[int] = _NOT_SET,
+    anon_max_pages: Optional[int] = _NOT_SET,
+    data_cache_ttl: Optional[int] = _NOT_SET,
+    search_cache_ttl: Optional[int] = _NOT_SET,
+    enable_cache: Optional[bool] = _NOT_SET,
 ) -> None:
     """
     Configure DataSetIQ client settings.
@@ -73,23 +76,24 @@ def configure(
         ...     data_cache_ttl=3600  # 1 hour cache
         ... )
     """
-    if api_key is not None:
+    if api_key is not _NOT_SET:
         _config.api_key = api_key
-    if base_url is not None:
-        _config.base_url = base_url.rstrip("/")
-    if timeout is not None:
+    if base_url is not _NOT_SET:
+        if base_url is not None:
+            _config.base_url = base_url.rstrip("/")
+    if timeout is not _NOT_SET:
         _config.timeout = timeout
-    if max_retries is not None:
+    if max_retries is not _NOT_SET:
         _config.max_retries = max_retries
-    if max_retry_sleep is not None:
+    if max_retry_sleep is not _NOT_SET:
         _config.max_retry_sleep = max_retry_sleep
-    if anon_max_pages is not None:
+    if anon_max_pages is not _NOT_SET:
         _config.anon_max_pages = anon_max_pages
-    if data_cache_ttl is not None:
+    if data_cache_ttl is not _NOT_SET:
         _config.data_cache_ttl = data_cache_ttl
-    if search_cache_ttl is not None:
+    if search_cache_ttl is not _NOT_SET:
         _config.search_cache_ttl = search_cache_ttl
-    if enable_cache is not None:
+    if enable_cache is not _NOT_SET:
         _config.enable_cache = enable_cache
 
 

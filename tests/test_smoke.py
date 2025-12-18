@@ -7,9 +7,29 @@ import pandas as pd
 import datasetiq as iq
 
 
+@pytest.fixture(autouse=True)
+def reset_config():
+    """Reset configuration and session before each test."""
+    # Reset configuration
+    iq.configure(
+        api_key=None,
+        enable_cache=False,
+        max_retries=3,
+    )
+    # Clear the global session to ensure clean state
+    import datasetiq.client
+    datasetiq.client._session = None
+    
+    yield
+    
+    # Cleanup after test
+    iq.configure(api_key=None, enable_cache=False)
+    datasetiq.client._session = None
+
+
 def test_import():
     """Test that package imports correctly."""
-    assert iq.__version__ == "0.1.0"
+    assert iq.__version__ == "0.1.2"
     assert hasattr(iq, 'get')
     assert hasattr(iq, 'search')
     assert hasattr(iq, 'configure')
@@ -38,7 +58,7 @@ def test_authenticated_csv():
     responses.add(
         responses.GET,
         "https://www.datasetiq.com/api/public/series/fred-cpi/csv",
-        body="date,value\\n2020-01-01,100.5\\n2020-02-01,101.2\\n",
+        body="date,value\n2020-01-01,100.5\n2020-02-01,101.2\n",
         status=200,
         content_type="text/csv",
     )
