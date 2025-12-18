@@ -13,6 +13,7 @@ import io
 import time
 from typing import Optional
 from importlib.metadata import version
+from urllib.parse import quote
 
 import pandas as pd
 import requests
@@ -338,15 +339,18 @@ def get(
     if end:
         params["end"] = end
     
+    # URL-encode series ID to handle slashes (e.g., "FRED/CPIAUCSL" -> "FRED%2FCPIAUCSL")
+    encoded_series_id = quote(series_id, safe='')
+    
     # Choose path: CSV (auth) or JSON (anon)
     if config.api_key:
         # Path A: Authenticated CSV export
-        url = f"{config.base_url}/series/{series_id}/csv"
+        url = f"{config.base_url}/series/{encoded_series_id}/csv"
         response = _make_request_with_retry("GET", url, headers=headers, params=params)
         df = _parse_csv_to_dataframe(response.text, dropna=dropna)
     else:
         # Path B: Anonymous paginated JSON
-        url = f"{config.base_url}/series/{series_id}/data"
+        url = f"{config.base_url}/series/{encoded_series_id}/data"
         params["limit"] = 100  # Anonymous limit
         
         all_data = []
