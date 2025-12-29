@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0] - 2025-12-28
+
+### Added
+- Feature helpers: `add_features()` for lags, rolling stats, MoM/YoY %, and z-scores
+- ML-ready bundles: `get_ml_ready()` to fetch multiple series, align dates, impute gaps, and add per-series features
+- Lightweight insights: `get_insight()` returns summary text with latest value, MoM/YoY changes, volatility, and trend
+- Semantic search option: `search(..., mode="semantic")` (where supported by the API)
+- Documentation updates for the new helpers and quotas mapped to existing plans
+
+### Changed
+- Expose new helpers via top-level package; version bump to 0.2.0
+- README updated with examples for features, insights, ML-ready bundles, and search modes
+
 ## [0.1.1] - 2025-12-17
 
 ### Fixed

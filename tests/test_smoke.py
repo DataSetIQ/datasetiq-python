@@ -29,9 +29,12 @@ def reset_config():
 
 def test_import():
     """Test that package imports correctly."""
-    assert iq.__version__ == "0.1.2"
+    assert iq.__version__ == "0.2.0"
     assert hasattr(iq, 'get')
     assert hasattr(iq, 'search')
+    assert hasattr(iq, 'add_features')
+    assert hasattr(iq, 'get_insight')
+    assert hasattr(iq, 'get_ml_ready')
     assert hasattr(iq, 'configure')
     assert hasattr(iq, 'set_api_key')
 

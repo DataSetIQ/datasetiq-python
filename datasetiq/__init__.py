@@ -21,12 +21,13 @@ Links:
     - Pricing: https://www.datasetiq.com/pricing
 """
 
-__version__ = "0.1.2"
+__version__ = "0.2.0"
 
 # Public API exports
 from .client import get, search
 from .config import configure, set_api_key
 from .cache import clear as clear_cache, get_cache_size
+from .features import add_features, get_insight, get_ml_ready
 
 # Exception exports (for type checking)
 from .exceptions import (
@@ -45,6 +46,9 @@ __all__ = [
     # Core functions
     "get",
     "search",
+    "add_features",
+    "get_insight",
+    "get_ml_ready",
     "configure",
     "set_api_key",
     # Cache management

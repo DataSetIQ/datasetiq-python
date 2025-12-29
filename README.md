@@ -111,6 +111,7 @@ Search for datasets by keyword.
 - `query` (str): Search term (searches titles, descriptions, IDs)
 - `limit` (int): Max results to return (default: `10`, max: `10`)
 - `offset` (int): Pagination offset (default: `0`)
+- `mode` (str): `"keyword"` (default) or `"semantic"` (where supported by API)
 
 **Returns:** `pd.DataFrame` with columns: `id`, `slug`, `title`, `description`, `provider`, `frequency`, `start_date`, `end_date`, `last_updated`
 
@@ -123,6 +124,54 @@ print(results[["id", "title", "provider"]])
 #              id                          title provider
 # 0  fred-unrate        Unemployment Rate (U.S.)     FRED
 # 1  bls-lns14000000  Labor Force: Unemployed       BLS
+```
+
+---
+
+### Feature Engineering Helpers
+
+#### `add_features(series, lags=(1,3,12), windows=(3,6,12), include=None, dropna=False)`
+
+Generate common modeling features (lags, rolling stats, MoM/YoY %, z-scores) for a single series.
+
+```python
+df = iq.add_features("fred-cpi", lags=[1, 3, 12], windows=[3, 12])
+print(df[["value", "value_yoy_pct", "value_mom_pct", "value_lag_1"]].tail())
+```
+
+---
+
+### Lightweight Insights
+
+#### `get_insight(series, window="1y")`
+
+Return a small dict with summary text + key metrics (latest value, MoM, YoY, volatility, trend).
+
+```python
+insight = iq.get_insight("fred-cpi", window="1y")
+print(insight["summary"])
+# fred-cpi: latest 311.17 on 2023-12-01 | +0.24% vs prior | +3.12% YoY | trend upward | volatility (std) 1.23
+```
+
+---
+
+### ML-Ready Bundles
+
+#### `get_ml_ready(series_ids, align="inner", impute="ffill+median", features="default")`
+
+Fetch multiple series, align on date, impute gaps, and add per-series features (lags, rolling stats, MoM/YoY %, z-score).
+
+```python
+df = iq.get_ml_ready(
+    ["fred-cpi", "fred-gdp"],
+    align="inner",
+    impute="ffill+median",
+    features="default",
+    lags=[1, 3, 12],
+    windows=[3, 12],
+)
+
+print(df.head())
 ```
 
 ---

@@ -402,6 +402,7 @@ def search(
     query: str,
     limit: int = 10,
     offset: int = 0,
+    mode: str = "keyword",
 ) -> pd.DataFrame:
     """
     Search for datasets by keyword.
@@ -410,6 +411,7 @@ def search(
         query: Search query (searches titles, descriptions, IDs)
         limit: Maximum results to return (default: 10, max: 10)
         offset: Pagination offset (default: 0)
+        mode: Search mode ('keyword' default, or 'semantic' where supported)
     
     Returns:
         DataFrame with columns: id, slug, title, description, provider,
@@ -438,7 +440,7 @@ def search(
     
     # Make request
     url = f"{config.base_url}/search"
-    params = {"q": query, "limit": min(limit, 10), "offset": offset}
+    params = {"q": query, "limit": min(limit, 10), "offset": offset, "mode": mode}
     
     response = _make_request_with_retry("GET", url, headers=headers, params=params)
     result = response.json()
