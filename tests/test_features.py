@@ -37,6 +37,7 @@ def test_get_insight_dataframe():
 
 def test_get_ml_ready_with_features(monkeypatch):
     df = _sample_df()
+    iq.configure(api_key="test-key")
     
     def fake_get(series_id, *args, **kwargs):
         return df.rename(columns={"value": "value"})

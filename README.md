@@ -160,6 +160,7 @@ print(insight["summary"])
 #### `get_ml_ready(series_ids, align="inner", impute="ffill+median", features="default")`
 
 Fetch multiple series, align on date, impute gaps, and add per-series features (lags, rolling stats, MoM/YoY %, z-score).
+Requires API key on a paid plan.
 
 ```python
 df = iq.get_ml_ready(

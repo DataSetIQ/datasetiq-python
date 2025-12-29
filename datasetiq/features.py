@@ -9,6 +9,8 @@ from typing import Iterable, List, Optional, Sequence, Tuple, Union
 import pandas as pd
 
 from .client import get
+from .config import get_config
+from .exceptions import AuthenticationError
 
 SeriesLike = Union[str, pd.DataFrame, pd.Series]
 
@@ -234,6 +236,10 @@ def get_ml_ready(
     Returns:
         DataFrame with aligned base columns and optional engineered features.
     """
+    config = get_config()
+    if not config.api_key:
+        raise AuthenticationError("get_ml_ready requires an API key on a paid plan.")
+
     join_how = "inner" if align == "inner" else "outer"
     frames = []
     for series_id in series_ids:
